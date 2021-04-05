@@ -3,15 +3,9 @@ require_once('main.class.php');
 $obJ = new mainClass();
 $markets = $obJ->readMarket('markets');
 
-/**
-$server = new mysqli("localhost", "root", "", "market");
-$marketQuery = "SELECT * FROM markets ORDER BY marketId ASC";
-$marketResult = $server->query($marketQuery);
-**/
 $market = '';
 $marketProduct = '';
 $i = 0;
-//while($rowKasuwa = $marketResult->fetch_array()){
   foreach ($markets as $rowKasuwa) {
    
  if($i == 0)
@@ -32,10 +26,6 @@ $i = 0;
    <div id="'.$rowKasuwa["marketId"].'" class="tab-pane fade">
   ';
  }
- /**
- $productQuery = "SELECT * FROM products WHERE marketId = '".$rowKasuwa["marketId"]."'";
- $productResult = $server->query($productQuery);
- **/
   $products = $obJ->readProductById('products', $rowKasuwa["marketId"]);
   $snn = 0;
   $date = date('d-m-Y h:i:s a');
@@ -53,7 +43,7 @@ $i = 0;
     ';
    }
   }else{
-    echo '404 :) No Product found';
+    $marketProduct .= '404 :) No Product found';
   }
  $marketProduct .= '<div style="clear:both"></div></div>';
  $i++;
@@ -64,11 +54,6 @@ $i = 0;
 <html>
  <head>
   <title>Market Tab</title>
-   <!--
-  <script src="bootstrap/js/jquery-3.6.0.min.js"></script>
-  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
-  <script src="bootstrap/js/bootstrap.min.js"></script>
--->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
